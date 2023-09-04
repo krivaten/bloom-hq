@@ -5,23 +5,25 @@ import prisma from "../../lib/prisma";
 const inter = Inter({ subsets: ["latin"] });
 
 export const getServerSideProps = async () => {
-  const posts = await prisma.post.findMany({
+  const posts = await prisma.case.findMany({
     select: {
       id: true,
-      title: true,
+      firstName: true,
+      lastName: true,
       description: true,
     },
   });
   return { props: { posts } };
 };
 
-interface Post {
+interface Case {
   id: string;
-  title: string;
+  firstName: string;
+  lastName: string;
   description: string;
 }
 
-export default function Home({ posts }: { posts: Post[] }) {
+export default function Home({ cases }: { cases: Case[] }) {
   return (
     <>
       <Head>
@@ -33,10 +35,10 @@ export default function Home({ posts }: { posts: Post[] }) {
       <main className={`${inter.className}`}>
         <p>Get started by editing&nbsp;</p>
         <div>
-          {posts &&
-            posts.map((post) => (
+          {cases &&
+            cases.map((post) => (
               <div key={post.id}>
-                <h2>{post.title}</h2>
+                <h2>{post.firstName}</h2>
                 <p>{post.description}</p>
               </div>
             ))}

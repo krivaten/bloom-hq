@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "migration:deploy": "prisma migrate deploy --preview-feature",
     "build": "next build",
-    "start": "next start",
+    "start": "pnpm run migration:deploy && next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,15 +24,15 @@
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.1",
     "next": "13.4.19",
+    "prisma": "^5.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@flydotio/dockerfile": "^0.4.8",
-    "prisma": "^5.1.1"
+    "@flydotio/dockerfile": "^0.4.8"
   },
   "prisma": {
-    "seed": "node prisma/seed.ts"
+    "seed": "node prisma/seed.mjs"
   }
 }
